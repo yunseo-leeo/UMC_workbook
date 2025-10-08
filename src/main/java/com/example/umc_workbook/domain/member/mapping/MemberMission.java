@@ -1,0 +1,35 @@
+package com.example.umc_workbook.domain.member.mapping;
+
+import com.example.umc_workbook.domain.member.entitiy.Member;
+import com.example.umc_workbook.domain.member.enums.MissionStatus;
+import com.example.umc_workbook.domain.mission.Mission;
+import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
+
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+public class MemberMission {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name ="missionStatus", nullable = false)
+    private MissionStatus missionStatus;
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id") // 주인
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mission_id") // 주인
+    private Mission mission;
+
+}

@@ -3,12 +3,15 @@ package com.example.umc_workbook.domain.member.entitiy;
 import com.example.umc_workbook.domain.member.enums.Gender;
 import com.example.umc_workbook.domain.member.enums.MemberStatus;
 import com.example.umc_workbook.domain.member.enums.SocialType;
+import com.example.umc_workbook.domain.member.mapping.*;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "member")
@@ -60,6 +63,19 @@ public class Member {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    @OneToMany(mappedBy = "member")
+    private List<MemberAlarm> memberAlarm = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<MemberAlarmSetting> memberAlarmSetting = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberFood> memberFood = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberMission> memberMission = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberTerms> memberTerms = new ArrayList<>();
 
 }

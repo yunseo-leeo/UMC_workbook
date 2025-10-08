@@ -1,12 +1,17 @@
 package com.example.umc_workbook.domain.alarm;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class alarm {
+public class Alarm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
