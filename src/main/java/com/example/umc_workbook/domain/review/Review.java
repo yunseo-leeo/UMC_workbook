@@ -1,5 +1,7 @@
 package com.example.umc_workbook.domain.review;
 
+import com.example.umc_workbook.domain.member.entitiy.Member;
+import com.example.umc_workbook.domain.store.Store;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,5 +30,13 @@ public class Review {
     @CreatedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id") // 주인
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id") // 주인
+    private Store store;
 
 }

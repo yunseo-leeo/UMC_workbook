@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "member")
+@Table(name = "members")
 @EntityListeners(AuditingEntityListener.class)
 public class Member {
 
@@ -78,4 +78,6 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MemberTerms> memberTerms = new ArrayList<>();
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PhoneVerification phoneVerification;
 }

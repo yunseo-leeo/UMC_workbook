@@ -4,9 +4,9 @@ spring:
     name: "umc_workbook"
 
   datasource: # MySQL JDBC ???? ??? ??
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PW}
+    url: "jdbc:mysql://localhost:3306/umc"
+    username: "root"
+    password: "mrtomas123*"
 
   jpa:
     driver-class-name: com.mysql.cj.jdbc.Driver # MySQL JDBC 드라이버 클래스 이름

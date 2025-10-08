@@ -16,4 +16,8 @@ public class PhoneVerification {
 
     @Column(name = "verified_at", nullable = false)
     private LocalDateTime verifiedAt;
+
+    @OneToOne
+    @JoinColumn(name = "member_id") // 주인
+    private Member member;
 }
