@@ -4,10 +4,15 @@ import com.example.umc_workbook.domain.member.enums.Gender;
 import com.example.umc_workbook.domain.member.enums.MemberStatus;
 import com.example.umc_workbook.domain.member.enums.SocialType;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "member")
+@EntityListeners(AuditingEntityListener.class)
 public class Member {
 
     @Id
@@ -43,6 +48,17 @@ public class Member {
 
     @Column(name = "socailType", nullable = false)
     private SocialType socailType;
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @CreatedDate
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 
 
 
