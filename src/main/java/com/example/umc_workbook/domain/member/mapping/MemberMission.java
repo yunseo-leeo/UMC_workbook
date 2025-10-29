@@ -1,6 +1,6 @@
 package com.example.umc_workbook.domain.member.mapping;
 
-import com.example.umc_workbook.domain.member.entitiy.Member;
+import com.example.umc_workbook.domain.member.entity.Member;
 import com.example.umc_workbook.domain.member.enums.MissionStatus;
 import com.example.umc_workbook.domain.mission.Mission;
 import jakarta.persistence.*;
@@ -18,6 +18,7 @@ public class MemberMission {
     private Long id;
 
     @Column(name ="missionStatus", nullable = false)
+    @Enumerated(EnumType.STRING)
     private MissionStatus missionStatus;
 
     @CreatedDate
