@@ -1,6 +1,6 @@
-package com.example.umc_workbook.domain.review;
+package com.example.umc_workbook.domain.review.entity;
 
-import com.example.umc_workbook.domain.member.entitiy.Member;
+import com.example.umc_workbook.domain.member.entity.Member;
 import com.example.umc_workbook.domain.store.Store;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;

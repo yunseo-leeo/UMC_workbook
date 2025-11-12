@@ -1,7 +1,7 @@
 package com.example.umc_workbook.domain.member.mapping;
 
-import com.example.umc_workbook.domain.member.entitiy.Food;
-import com.example.umc_workbook.domain.member.entitiy.Member;
+import com.example.umc_workbook.domain.member.entity.Food;
+import com.example.umc_workbook.domain.member.entity.Member;
 import jakarta.persistence.*;
 
 @Entity

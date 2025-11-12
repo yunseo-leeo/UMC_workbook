@@ -1,4 +1,4 @@
-package com.example.umc_workbook.domain.member.entitiy;
+package com.example.umc_workbook.domain.member.entity;
 
 import com.example.umc_workbook.domain.member.enums.FoodCategory;
 import jakarta.persistence.*;

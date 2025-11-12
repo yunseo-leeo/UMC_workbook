@@ -1,10 +1,11 @@
-package com.example.umc_workbook.domain.member.entitiy;
+package com.example.umc_workbook.domain.member.entity;
 
 import com.example.umc_workbook.domain.member.enums.Gender;
 import com.example.umc_workbook.domain.member.enums.MemberStatus;
 import com.example.umc_workbook.domain.member.enums.SocialType;
 import com.example.umc_workbook.domain.member.mapping.*;
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "members")
 @EntityListeners(AuditingEntityListener.class)
+@Getter
 public class Member {
 
     @Id
