@@ -15,7 +15,7 @@ public interface MemberRepository {
         m.name, m.email, m.phoneNumber, m.point
             )
     FROM Member m
-    WHERE m.id = :#{#req.memberId}
+    WHERE m.id = :memberId
     """)
     Optional<MemberMypageResponseDto> findMemberMypage(@Param("id") Long id);
 }
