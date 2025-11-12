@@ -3,6 +3,8 @@ package com.example.umc_workbook.domain.review.controller;
 import com.example.umc_workbook.domain.review.dto.MyReviewDto;
 import com.example.umc_workbook.domain.review.enums.ReviewSort;
 import com.example.umc_workbook.domain.review.service.ReviewQueryService;
+import com.example.umc_workbook.global.apiPayload.ApiResponse;
+import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +22,13 @@ public class ReviewQueryController {
     private final ReviewQueryService reviewQueryService;
 
     @GetMapping("/my")
-    public List<MyReviewDto> getMyReviews(
+    public ApiResponse<List<MyReviewDto>> getMyReviews(
             @AuthenticationPrincipal(expression = "id") Long memberId,
             @RequestParam(defaultValue = "SCORE")ReviewSort sort
     ) {
-        return reviewQueryService.findMyReviews(memberId, sort);
+        return ApiResponse.onSuccess(
+                GeneralSuccessCode.FETCHED,
+                reviewQueryService.findMyReviews(memberId, sort)
+        );
     }
 }
