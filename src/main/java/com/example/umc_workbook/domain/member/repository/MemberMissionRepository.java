@@ -1,5 +1,7 @@
 package com.example.umc_workbook.domain.member.repository;
 
+import com.example.umc_workbook.domain.member.dto.MemberMissionRequestDto;
+import com.example.umc_workbook.domain.member.dto.MemberMissionResponseDto;
 import com.example.umc_workbook.domain.member.enums.MissionStatus;
 import com.example.umc_workbook.domain.member.mapping.MemberMission;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +18,9 @@ import java.util.List;
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long> {
 
     @Query("""
-    SELECT um
+    SELECT new com.example.umc_workbook.domain.member.dto.MemberMissionResponseDto(
+        m.id,m.content,m.point, s.name, s.address, um.missionStatus, um.createdAt
+        )
     FROM MemberMission um
     JOIN FETCH um.mission m
     JOIN FETCH m.store s
@@ -26,18 +30,16 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
           com.example.umc_workbook.domain.member.enums.MissionStatus.COMPLETED
       )
       AND (
-            :cursorPoint IS NULL
-            OR (m.point < :cursorPoint)
-            OR (m.point = :cursorPoint AND um.createdAt < :cursorCreatedAt)
-            OR (m.point = :cursorPoint AND um.createdAt = :cursorCreatedAt AND um.id < :cursorId)
+            :#{#req.cursorPoint} IS NULL
+            OR (m.point < :#{#req.cursorPoint})
+            OR (m.point = :#{#req.cursorPoint} AND um.createdAt < :#{#req.cursorCreatedAt})
+            OR (m.point = :#{#req.cursorPoint} AND um.createdAt = :#{#req.cursorCreatedAt} AND um.id < :#{#req.cursorId})
     )
     ORDER BY m.point DESC, um.createdAt DESC, um.id DESC
     """)
-    List<MemberMission> findUserMissionsWithCursor(
-            @Param("userId") Long userId,
-            @Param("cursorPoint") Integer cursorPoint,
-            @Param("cursorCreatedAt") LocalDateTime cursorCreatedAt,
-            @Param("cursorId") Long cursorId,
+    List<MemberMissionResponseDto> findMemberMissions(
+            @Param("memberId") Long memberId,
+            @Param("req") MemberMissionRequestDto req,
             Pageable pageable
     );
 }

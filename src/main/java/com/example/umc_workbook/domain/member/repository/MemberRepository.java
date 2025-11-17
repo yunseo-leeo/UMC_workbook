@@ -1,19 +1,22 @@
 package com.example.umc_workbook.domain.member.repository;
 
+import com.example.umc_workbook.domain.member.dto.MemberMypageResponseDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MemberRepository {
 
     @Query("""
-    SELECT m.name, m.email, m.phoneNumber, m.point
+    SELECT new com.example.umc_workbook.domain.member.dto.MemberMypageResponseDto(
+        m.name, m.email, m.phoneNumber, m.point
+            )
     FROM Member m
-    WHERE m.id = :id
+    WHERE m.id = :memberId
     """)
-    List<Object[]> findMemberMypageById(@Param("id") Long id);
+    Optional<MemberMypageResponseDto> findMemberMypage(@Param("id") Long id);
 }
 
