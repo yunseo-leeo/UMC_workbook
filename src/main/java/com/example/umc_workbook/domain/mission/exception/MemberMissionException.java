@@ -1,4 +1,4 @@
-package com.example.umc_workbook.domain.member.exception;
+package com.example.umc_workbook.domain.mission.exception;
 
 import com.example.umc_workbook.global.apiPayload.code.BaseErrorCode;
 import com.example.umc_workbook.global.apiPayload.exception.GeneralException;

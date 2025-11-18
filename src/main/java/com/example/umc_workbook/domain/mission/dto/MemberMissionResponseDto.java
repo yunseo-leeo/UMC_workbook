@@ -1,6 +1,6 @@
-package com.example.umc_workbook.domain.member.dto;
+package com.example.umc_workbook.domain.mission.dto;
 
-import com.example.umc_workbook.domain.member.enums.MissionStatus;
+import com.example.umc_workbook.domain.mission.enums.MissionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

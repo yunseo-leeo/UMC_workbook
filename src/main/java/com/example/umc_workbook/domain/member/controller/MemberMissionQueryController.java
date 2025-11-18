@@ -1,8 +1,8 @@
 package com.example.umc_workbook.domain.member.controller;
 
-import com.example.umc_workbook.domain.member.dto.MemberMissionRequestDto;
-import com.example.umc_workbook.domain.member.dto.MemberMissionResponseDto;
-import com.example.umc_workbook.domain.member.service.MemberMissionQueryService;
+import com.example.umc_workbook.domain.mission.dto.MemberMissionRequestDto;
+import com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto;
+import com.example.umc_workbook.domain.mission.service.MemberMissionQueryService;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;

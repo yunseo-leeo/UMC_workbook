@@ -1,17 +1,14 @@
-package com.example.umc_workbook.domain.member.repository;
+package com.example.umc_workbook.domain.mission.repository;
 
-import com.example.umc_workbook.domain.member.dto.MemberMissionRequestDto;
-import com.example.umc_workbook.domain.member.dto.MemberMissionResponseDto;
-import com.example.umc_workbook.domain.member.enums.MissionStatus;
-import com.example.umc_workbook.domain.member.mapping.MemberMission;
+import com.example.umc_workbook.domain.mission.dto.MemberMissionRequestDto;
+import com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto;
+import com.example.umc_workbook.domain.mission.entity.MemberMission;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import static com.example.umc_workbook.domain.member.enums.MissionStatus.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository

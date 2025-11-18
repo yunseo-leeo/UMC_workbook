@@ -4,6 +4,7 @@ import com.example.umc_workbook.domain.member.enums.Gender;
 import com.example.umc_workbook.domain.member.enums.MemberStatus;
 import com.example.umc_workbook.domain.member.enums.SocialType;
 import com.example.umc_workbook.domain.member.mapping.*;
+import com.example.umc_workbook.domain.mission.entity.MemberMission;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

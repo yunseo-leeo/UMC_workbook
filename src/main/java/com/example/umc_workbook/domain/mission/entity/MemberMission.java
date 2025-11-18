@@ -1,8 +1,7 @@
-package com.example.umc_workbook.domain.member.mapping;
+package com.example.umc_workbook.domain.mission.entity;
 
 import com.example.umc_workbook.domain.member.entity.Member;
-import com.example.umc_workbook.domain.member.enums.MissionStatus;
-import com.example.umc_workbook.domain.mission.Mission;
+import com.example.umc_workbook.domain.mission.enums.MissionStatus;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

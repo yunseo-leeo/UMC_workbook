@@ -1,4 +1,4 @@
-package com.example.umc_workbook.domain.mission;
+package com.example.umc_workbook.domain.mission.entity;
 
 import com.example.umc_workbook.domain.store.Store;
 import jakarta.persistence.*;
