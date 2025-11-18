@@ -15,7 +15,7 @@ import java.util.List;
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long> {
 
     @Query("""
-    SELECT new com.example.umc_workbook.domain.member.dto.MemberMissionResponseDto(
+    SELECT new com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto(
         m.id,m.content,m.point, s.name, s.address, um.missionStatus, um.createdAt
         )
     FROM MemberMission um
@@ -23,8 +23,8 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
     JOIN FETCH m.store s
     WHERE um.member.id = :userId
       AND um.missionStatus IN (
-          com.example.umc_workbook.domain.member.enums.MissionStatus.IN_PROGRESS,
-          com.example.umc_workbook.domain.member.enums.MissionStatus.COMPLETED
+          com.example.umc_workbook.domain.mission.enums.MissionStatus.IN_PROGRESS,
+          com.example.umc_workbook.domain.mission.enums.MissionStatus.COMPLETED
       )
       AND (
             :#{#req.cursorPoint} IS NULL
@@ -39,4 +39,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
             @Param("req") MemberMissionRequestDto req,
             Pageable pageable
     );
+
+    boolean existsByMemberIdAndMissionId(Long memberId, Long missionId);
 }
