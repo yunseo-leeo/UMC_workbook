@@ -1,5 +1,9 @@
 package com.example.umc_workbook.domain.store.service;
 
+import com.example.umc_workbook.domain.mission.entity.Mission;
+import com.example.umc_workbook.domain.mission.exception.MissionException;
+import com.example.umc_workbook.domain.mission.repository.MissionRepository;
+import com.example.umc_workbook.domain.store.dto.MissionAddRequestDto;
 import com.example.umc_workbook.domain.store.dto.StoreCreateRequestDto;
 import com.example.umc_workbook.domain.store.entity.Store;
 import com.example.umc_workbook.domain.store.exception.StoreException;
@@ -14,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class StoreService {
 
     private final StoreRepository storeRepository;
+    private final MissionRepository missionRepository;
 
     @Transactional
     public void addStore(StoreCreateRequestDto req){
@@ -37,5 +42,25 @@ public class StoreService {
         );
 
         storeRepository.save(store);
+    }
+
+    @Transactional
+    public void addMissionToStore(Long storeId, MissionAddRequestDto req){
+
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new StoreException(GeneralErrorCode.STORE_NOT_FOUND));
+
+        if(req.getPoint() == null || req.getPoint() <= 0){
+            throw new MissionException(GeneralErrorCode.INVALID_POINT);
+        }
+
+        Mission mission = Mission.create(
+                req.getContent(),
+                req.getPoint(),
+                req.getDeadline(),
+                store
+        );
+
+        missionRepository.save(mission);
     }
 }

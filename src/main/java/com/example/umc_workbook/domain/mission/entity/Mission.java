@@ -2,11 +2,16 @@ package com.example.umc_workbook.domain.mission.entity;
 
 import com.example.umc_workbook.domain.store.entity.Store;
 import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@Builder
+@AllArgsConstructor
 public class Mission {
 
     @Id
@@ -17,7 +22,7 @@ public class Mission {
     private String content;
 
     @Column(name = "point", length = 3, nullable = false)
-    private int point;
+    private Integer point;
 
     @Column(name = "deadline")
     private Long deadline;
@@ -30,5 +35,13 @@ public class Mission {
     @JoinColumn(name = "store_id") // 외래 키는 Mission 테이블에 존재
     private Store store;
 
+    public static Mission create(String content, int point, Long deadline, Store store) {
+        return Mission.builder()
+                .content(content)
+                .point(point)
+                .deadline(deadline)
+                .store(store)
+                .build();
+    }
 
 }

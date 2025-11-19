@@ -38,6 +38,7 @@ public enum GeneralErrorCode implements BaseErrorCode {
     //미션 에러
     MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION_4041", "해당 미션을 찾을 수 없습니다."),
     MISSION_ALREADY_CHALLENGING(HttpStatus.BAD_REQUEST, "MISSION_4001", "이미 도전 중인 미션입니다."),
+    INVALID_POINT(HttpStatus.BAD_REQUEST, "MISSION_4002", "유효하지 않은 포인트 값입니다."),
 
     //주소 에러
     INVALID_ADDRESS(HttpStatus.BAD_REQUEST, "ADDRESS_4001", "잘못된 지역 코드입니다.")
