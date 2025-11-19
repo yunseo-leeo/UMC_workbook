@@ -1,5 +1,6 @@
 package com.example.umc_workbook.domain.store;
 
+import com.example.umc_workbook.domain.common.AddressType;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,8 +16,8 @@ public class Store {
     @Column(name = "category", length = 5, nullable = false)
     private String category;
 
-    @Column(name = "address", length = 20, nullable = false)
-    private String address;
+    @Column(name = "address", nullable = false)
+    private AddressType address;
 
     @Column(name = "detailAddress", length = 30, nullable = false)
     private String detailAddress;

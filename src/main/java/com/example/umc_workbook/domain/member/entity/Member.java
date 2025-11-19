@@ -1,5 +1,6 @@
 package com.example.umc_workbook.domain.member.entity;
 
+import com.example.umc_workbook.domain.common.AddressType;
 import com.example.umc_workbook.domain.member.enums.Gender;
 import com.example.umc_workbook.domain.member.enums.MemberStatus;
 import com.example.umc_workbook.domain.member.enums.SocialType;
@@ -34,8 +35,8 @@ public class Member {
     @Column(name = "birth", nullable =false)
     private LocalDate birth;
 
-    @Column(name = "address", length = 20, nullable = false)
-    private String address;
+    @Column(name = "address", nullable = false)
+    private AddressType address;
 
     @Column(name = "email", length = 30, nullable = false)
     private String email;
