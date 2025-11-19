@@ -23,7 +23,7 @@ public class ReviewQueryController {
 
     private final ReviewQueryService reviewQueryService;
 
-    @GetMapping("/my")
+    /*@GetMapping("/my")
     public ApiResponse<List<MyReviewDto>> getMyReviews(
             @AuthenticationPrincipal(expression = "id") Long memberId,
             @RequestParam(defaultValue = "SCORE")ReviewSort sort
@@ -36,5 +36,5 @@ public class ReviewQueryController {
                 GeneralSuccessCode.FETCHED,
                 reviewQueryService.findMyReviews(memberId, sort)
         );
-    }
+    }*/
 }

@@ -16,11 +16,11 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
 
     @Query("""
     SELECT new com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto(
-        m.id,m.content,m.point, s.name, s.address, um.missionStatus, um.createdAt
+        m.id, m.content, m.point, s.name, s.address, um.missionStatus, um.createdAt
         )
     FROM MemberMission um
-    JOIN FETCH um.mission m
-    JOIN FETCH m.store s
+    JOIN um.mission m
+    JOIN m.store s
     WHERE um.member.id = :userId
       AND um.missionStatus IN (
           com.example.umc_workbook.domain.mission.enums.MissionStatus.IN_PROGRESS,

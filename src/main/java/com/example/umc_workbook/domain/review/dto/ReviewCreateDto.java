@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+
 
 @Getter
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class ReviewCreateDto {
     @NotNull
     @Min(0)
     @Max(5)
-    private Double score;
+    private BigDecimal score;
 
     private String content;
 }

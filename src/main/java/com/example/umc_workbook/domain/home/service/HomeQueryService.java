@@ -21,7 +21,7 @@ public class HomeQueryService {
 
     public List<HomeResponseDto> findHomePage(Long memberId, HomeRequestDto req) {
 
-        if(req.getAddress() == null || req.getAddress().isEmpty()) {
+        if(req.getAddress() == null) {
             throw new HomeException(GeneralErrorCode.BAD_REQUEST);
         }
         return homeRepository.findHomePage(memberId,req,req.toPageable());

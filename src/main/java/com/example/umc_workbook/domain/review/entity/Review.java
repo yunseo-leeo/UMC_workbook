@@ -25,7 +25,7 @@ public class Review {
     private Long id;
 
     @Column(name = "score", precision = 2, scale = 1, nullable = false)
-    private Double score;
+    private BigDecimal score;
 
     @Column(name = "content", length = 100)
     private String content;
@@ -46,7 +46,7 @@ public class Review {
     @JoinColumn(name = "store_id")
     private Store store;
 
-    public static Review create(Member member, Store store, Double score, String content) {
+    public static Review create(Member member, Store store, BigDecimal score, String content) {
         return Review.builder()
                 .member(member)
                 .store(store)

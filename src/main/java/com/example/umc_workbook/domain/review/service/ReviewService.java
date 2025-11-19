@@ -23,6 +23,7 @@ public class ReviewService {
     private final MemberRepository memberRepository;
     private final StoreRepository storeRepository;
 
+    @Transactional
     public void insertReview(Long memberId, ReviewCreateDto req) {
 
         Member member = memberRepository.findById(memberId)

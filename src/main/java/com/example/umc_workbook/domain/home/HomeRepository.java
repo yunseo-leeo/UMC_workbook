@@ -2,17 +2,15 @@ package com.example.umc_workbook.domain.home;
 
 import com.example.umc_workbook.domain.home.dto.HomeRequestDto;
 import com.example.umc_workbook.domain.home.dto.HomeResponseDto;
+import com.example.umc_workbook.domain.member.entity.Member;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Repository
-public interface HomeRepository{
-
+public interface HomeRepository extends JpaRepository<Member, Long>{
 
     @Query("""
         SELECT new com.example.umc_workbook.domain.home.dto.HomeResponseDto(

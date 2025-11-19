@@ -1,4 +1,4 @@
-package com.example.umc_workbook.domain.member.controller;
+package com.example.umc_workbook.domain.mission.controller;
 
 import com.example.umc_workbook.domain.mission.dto.MemberMissionRequestDto;
 import com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto;
@@ -21,7 +21,7 @@ public class MemberMissionQueryController {
 
     private final MemberMissionQueryService memberMissionQueryService;
 
-    @GetMapping("/my")
+    /*@GetMapping("/my")
     public ApiResponse<List<MemberMissionResponseDto>> findMemberMissions(
             @AuthenticationPrincipal(expression = "id") Long MemberId,
             @ModelAttribute MemberMissionRequestDto req
@@ -30,5 +30,5 @@ public class MemberMissionQueryController {
                 GeneralSuccessCode.FETCHED,
                 memberMissionQueryService.findMemberMissions(MemberId, req)
         );
-    }
+    }*/
 }
