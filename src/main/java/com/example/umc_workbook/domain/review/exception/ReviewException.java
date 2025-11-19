@@ -6,15 +6,8 @@ import com.example.umc_workbook.global.apiPayload.exception.GeneralException;
 
 public class ReviewException extends GeneralException {
 
-    public ReviewException(BaseErrorCode code) {
-        super(code);
+    public ReviewException(BaseErrorCode errorCode) {
+        super(errorCode);
     }
 
-    public static ReviewException memberNotFound() {
-        return new ReviewException(GeneralErrorCode.MEMBER_NOT_FOUND);
-    }
-
-    public static ReviewException reviewNotFound() {
-        return new ReviewException(GeneralErrorCode.REVIEW_NOT_FOUND);
-    }
 }

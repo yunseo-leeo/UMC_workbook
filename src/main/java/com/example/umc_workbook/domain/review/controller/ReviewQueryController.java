@@ -1,9 +1,11 @@
 package com.example.umc_workbook.domain.review.controller;
 
+import com.example.umc_workbook.domain.member.exception.MemberException;
 import com.example.umc_workbook.domain.review.dto.MyReviewDto;
 import com.example.umc_workbook.domain.review.enums.ReviewSort;
 import com.example.umc_workbook.domain.review.service.ReviewQueryService;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
+import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,6 +28,10 @@ public class ReviewQueryController {
             @AuthenticationPrincipal(expression = "id") Long memberId,
             @RequestParam(defaultValue = "SCORE")ReviewSort sort
     ) {
+        if (memberId == null) {
+            throw new MemberException(GeneralErrorCode.MEMBER_NOT_FOUND);
+        }
+
         return ApiResponse.onSuccess(
                 GeneralSuccessCode.FETCHED,
                 reviewQueryService.findMyReviews(memberId, sort)
