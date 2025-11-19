@@ -9,10 +9,7 @@ import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class ReviewQueryController {
 
     private final ReviewQueryService reviewQueryService;
 
-    /*@GetMapping("/my")
+    @GetMapping("/my")
     public ApiResponse<List<MyReviewDto>> getMyReviews(
             @AuthenticationPrincipal(expression = "id") Long memberId,
             @RequestParam(defaultValue = "SCORE")ReviewSort sort
@@ -36,5 +33,5 @@ public class ReviewQueryController {
                 GeneralSuccessCode.FETCHED,
                 reviewQueryService.findMyReviews(memberId, sort)
         );
-    }*/
+    }
 }

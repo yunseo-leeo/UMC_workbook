@@ -3,7 +3,7 @@ package com.example.umc_workbook.domain.review.repository;
 import com.example.umc_workbook.domain.review.dto.MyReviewDto;
 import com.example.umc_workbook.domain.review.entity.QReview;
 import com.example.umc_workbook.domain.review.enums.ReviewSort;
-import com.example.umc_workbook.domain.store.QStore;
+import com.example.umc_workbook.domain.store.entity.QStore;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
