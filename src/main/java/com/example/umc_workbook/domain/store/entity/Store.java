@@ -1,9 +1,14 @@
-package com.example.umc_workbook.domain.store;
+package com.example.umc_workbook.domain.store.entity;
 
 import com.example.umc_workbook.domain.common.AddressType;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Store {
 
     @Id
@@ -21,5 +26,14 @@ public class Store {
 
     @Column(name = "detailAddress", length = 30, nullable = false)
     private String detailAddress;
+
+    public static Store create(String name, String category, AddressType address, String detailAddress) {
+        return Store.builder()
+                .name(name)
+                .category(category)
+                .address(address)
+                .detailAddress(detailAddress)
+                .build();
+    }
 }
 

@@ -6,7 +6,7 @@ import com.example.umc_workbook.domain.member.repository.MemberRepository;
 import com.example.umc_workbook.domain.review.dto.ReviewCreateDto;
 import com.example.umc_workbook.domain.review.entity.Review;
 import com.example.umc_workbook.domain.review.repository.ReviewRepository;
-import com.example.umc_workbook.domain.store.Store;
+import com.example.umc_workbook.domain.store.entity.Store;
 import com.example.umc_workbook.domain.store.exception.StoreException;
 import com.example.umc_workbook.domain.store.repository.StoreRepository;
 import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;

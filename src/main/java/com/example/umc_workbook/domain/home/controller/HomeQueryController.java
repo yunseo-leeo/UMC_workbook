@@ -21,7 +21,7 @@ public class HomeQueryController {
 
     private final HomeQueryService homeQueryService;
 
-    /*@GetMapping
+    @GetMapping
     public ApiResponse<List<HomeResponseDto>> findHomePage(
             @AuthenticationPrincipal(expression = "id") Long memberId,
             @ModelAttribute HomeRequestDto requestDto
@@ -30,6 +30,6 @@ public class HomeQueryController {
                 GeneralSuccessCode.FETCHED,
                 homeQueryService.findHomePage(memberId, requestDto)
         );
-    }*/
+    }
 
 }

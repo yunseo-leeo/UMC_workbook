@@ -1,7 +1,7 @@
 package com.example.umc_workbook.domain.review.entity;
 
 import com.example.umc_workbook.domain.member.entity.Member;
-import com.example.umc_workbook.domain.store.Store;
+import com.example.umc_workbook.domain.store.entity.Store;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

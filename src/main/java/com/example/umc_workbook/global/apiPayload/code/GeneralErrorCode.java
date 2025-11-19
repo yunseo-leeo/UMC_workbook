@@ -32,6 +32,8 @@ public enum GeneralErrorCode implements BaseErrorCode {
 
     //가게 에러
     STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE_4041", "해당 가게를 찾을 수 없습니다."),
+    EMPTY_DETAIL_ADDRESS(HttpStatus.BAD_REQUEST, "STORE_4001", "상세 주소가 비어 있습니다."),
+    EMPTY_STORE_NAME(HttpStatus.BAD_REQUEST, "STORE_4002", "가게 이름이 비어 있습니다."),
 
     //미션 에러
     MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION_4041", "해당 미션을 찾을 수 없습니다."),
