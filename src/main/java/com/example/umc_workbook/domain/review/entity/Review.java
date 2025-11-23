@@ -1,8 +1,12 @@
 package com.example.umc_workbook.domain.review.entity;
 
 import com.example.umc_workbook.domain.member.entity.Member;
-import com.example.umc_workbook.domain.store.Store;
+import com.example.umc_workbook.domain.store.entity.Store;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -11,6 +15,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
 public class Review {
 
     @Id
@@ -32,11 +39,20 @@ public class Review {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id") // 주인
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id") // 주인
+    @JoinColumn(name = "store_id")
     private Store store;
 
+    public static Review create(Member member, Store store, BigDecimal score, String content) {
+        return Review.builder()
+                .member(member)
+                .store(store)
+                .score(score)
+                .content(content)
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
 }

@@ -1,11 +1,10 @@
-package com.example.umc_workbook.domain.member.service;
+package com.example.umc_workbook.domain.mission.service;
 
-import com.example.umc_workbook.domain.member.dto.MemberMissionRequestDto;
-import com.example.umc_workbook.domain.member.dto.MemberMissionResponseDto;
-import com.example.umc_workbook.domain.member.exception.MemberMissionException;
-import com.example.umc_workbook.domain.member.repository.MemberMissionRepository;
+import com.example.umc_workbook.domain.mission.dto.MemberMissionRequestDto;
+import com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto;
+import com.example.umc_workbook.domain.mission.exception.MemberMissionException;
+import com.example.umc_workbook.domain.mission.repository.MemberMissionRepository;
 import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
-import com.example.umc_workbook.global.apiPayload.exception.GeneralException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

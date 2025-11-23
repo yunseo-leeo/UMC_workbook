@@ -1,19 +1,13 @@
 package com.example.umc_workbook.domain.review.exception;
 
 import com.example.umc_workbook.global.apiPayload.code.BaseErrorCode;
+import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc_workbook.global.apiPayload.exception.GeneralException;
 
 public class ReviewException extends GeneralException {
 
-    public ReviewException(BaseErrorCode code) {
-        super(code);
+    public ReviewException(BaseErrorCode errorCode) {
+        super(errorCode);
     }
 
-    public static ReviewException memberNotFound() {
-        return new ReviewException(ReviewErrorCode.MEMBER_NOT_FOUND);
-    }
-
-    public static ReviewException reviewNotFound() {
-        return new ReviewException(ReviewErrorCode.REVIEW_NOT_FOUND);
-    }
 }

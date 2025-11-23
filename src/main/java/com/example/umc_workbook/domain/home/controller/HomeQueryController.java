@@ -31,4 +31,5 @@ public class HomeQueryController {
                 homeQueryService.findHomePage(memberId, requestDto)
         );
     }
+
 }

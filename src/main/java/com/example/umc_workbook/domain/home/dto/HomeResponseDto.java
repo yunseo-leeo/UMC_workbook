@@ -1,5 +1,6 @@
 package com.example.umc_workbook.domain.home.dto;
 
+import com.example.umc_workbook.domain.common.AddressType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +14,6 @@ public class HomeResponseDto {
     private String content;
     private int point;
     private String storeName;
-    private String address;
+    private AddressType address;
 
 }

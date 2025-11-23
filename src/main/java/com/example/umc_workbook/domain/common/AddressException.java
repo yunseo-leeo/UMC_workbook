@@ -1,11 +1,10 @@
-package com.example.umc_workbook.domain.member.exception;
+package com.example.umc_workbook.domain.common;
 
 import com.example.umc_workbook.global.apiPayload.code.BaseErrorCode;
 import com.example.umc_workbook.global.apiPayload.exception.GeneralException;
 
-public class MemberMissionException extends GeneralException {
-
-    public MemberMissionException(BaseErrorCode errorCode) {
+public class AddressException extends GeneralException {
+    public AddressException(BaseErrorCode errorCode) {
         super(errorCode);
     }
 }

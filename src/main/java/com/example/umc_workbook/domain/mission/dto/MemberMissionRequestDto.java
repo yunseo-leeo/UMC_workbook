@@ -1,4 +1,4 @@
-package com.example.umc_workbook.domain.member.dto;
+package com.example.umc_workbook.domain.mission.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
