@@ -30,9 +30,6 @@ public enum GeneralErrorCode implements BaseErrorCode {
     //회원 에러
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER_4041", "해당 회원을 찾을 수 없습니다."),
 
-    //리뷰 에러
-    REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND, "REVIEW_4041", "해당 리뷰를 찾을 수 없습니다."),
-
     //가게 에러
     STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE_4041", "해당 가게를 찾을 수 없습니다."),
     EMPTY_DETAIL_ADDRESS(HttpStatus.BAD_REQUEST, "STORE_4001", "상세 주소가 비어 있습니다."),
