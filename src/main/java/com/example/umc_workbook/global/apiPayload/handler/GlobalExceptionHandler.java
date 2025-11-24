@@ -4,9 +4,14 @@ import com.example.umc_workbook.global.apiPayload.ApiResponse;
 import com.example.umc_workbook.global.apiPayload.code.BaseErrorCode;
 import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc_workbook.global.apiPayload.exception.GeneralException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -26,5 +31,36 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(code.getStatus())
                 .body(ApiResponse.onFailure(code, ex.getMessage()));
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    protected ResponseEntity<ApiResponse<String>> handleConstraintViolationException(
+            ConstraintViolationException ex
+    ) {
+        String errorMessage = ex.getConstraintViolations()
+                .stream()
+                .map(constraint -> constraint.getMessage())
+                .findFirst()
+                .orElse("유효하지 않은 요청 값입니다.");
+
+        GeneralErrorCode code = GeneralErrorCode.VALID_FAIL;
+        ApiResponse<String> response = ApiResponse.onFailure(code, errorMessage);
+
+        return ResponseEntity.status(code.getStatus()).body(response);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<ApiResponse<Map<String, String>>> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.put(error.getField(), error.getDefaultMessage())
+        );
+
+        GeneralErrorCode code = GeneralErrorCode.VALID_FAIL;
+        ApiResponse<Map<String, String>> errorResponse = ApiResponse.onFailure(code, errors);
+
+        return ResponseEntity.status(code.getStatus()).body(errorResponse);
     }
 }
