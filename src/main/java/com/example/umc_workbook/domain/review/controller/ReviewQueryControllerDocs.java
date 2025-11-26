@@ -1,12 +1,10 @@
 package com.example.umc_workbook.domain.review.controller;
 
-import com.example.umc_workbook.domain.review.dto.ReviewResDTO;
-import com.example.umc_workbook.domain.review.enums.ReviewSort;
+import com.example.umc_workbook.domain.review.dto.ReviewResDto;
 import com.example.umc_workbook.global.annotation.ValidPage;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +18,11 @@ public interface ReviewQueryControllerDocs {
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "조회 성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "잘못된 요청"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "대상이 존재하지 않음")
+
     })
-    @GetMapping("/reviews/{memberId}")
-    ApiResponse<ReviewResDTO.MyReviewListDto> getMyReviews(
+    @GetMapping("/members/{memberId}/reviews")
+    ApiResponse<ReviewResDto.MyReviewListDto> getMyReviews(
             @PathVariable Long memberId,
             @RequestParam(value = "page", defaultValue = "1") @ValidPage Integer page
     );
