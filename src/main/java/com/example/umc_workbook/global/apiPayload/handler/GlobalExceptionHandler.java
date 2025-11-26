@@ -34,20 +34,23 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    protected ResponseEntity<ApiResponse<String>> handleConstraintViolationException(
+    protected ResponseEntity<ApiResponse<Map<String, String>>> handleConstraintViolationException(
             ConstraintViolationException ex
     ) {
-        String errorMessage = ex.getConstraintViolations()
-                .stream()
-                .map(constraint -> constraint.getMessage())
-                .findFirst()
-                .orElse("유효하지 않은 요청 값입니다.");
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getConstraintViolations().forEach(violation -> {
+            String field = violation.getPropertyPath().toString();
+            String message = violation.getMessage();
+            errors.put(field, message);
+        });
 
         GeneralErrorCode code = GeneralErrorCode.VALID_FAIL;
-        ApiResponse<String> response = ApiResponse.onFailure(code, errorMessage);
+        ApiResponse<Map<String, String>> errorResponse = ApiResponse.onFailure(code, errors);
 
-        return ResponseEntity.status(code.getStatus()).body(response);
+        return ResponseEntity.status(code.getStatus()).body(errorResponse);
     }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ApiResponse<Map<String, String>>> handleMethodArgumentNotValidException(
