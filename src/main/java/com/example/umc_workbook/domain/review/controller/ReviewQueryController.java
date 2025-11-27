@@ -1,37 +1,31 @@
 package com.example.umc_workbook.domain.review.controller;
 
-import com.example.umc_workbook.domain.member.exception.MemberException;
-import com.example.umc_workbook.domain.review.dto.MyReviewDto;
-import com.example.umc_workbook.domain.review.enums.ReviewSort;
+import com.example.umc_workbook.domain.review.dto.ReviewResDto;
 import com.example.umc_workbook.domain.review.service.ReviewQueryService;
+import com.example.umc_workbook.global.annotation.ValidPage;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
-import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
+@Validated
 @RequiredArgsConstructor
-@RequestMapping(value = "/reviews")
-public class ReviewQueryController {
+public class ReviewQueryController implements ReviewQueryControllerDocs {
 
     private final ReviewQueryService reviewQueryService;
 
-    @GetMapping("/my")
-    public ApiResponse<List<MyReviewDto>> getMyReviews(
-            @AuthenticationPrincipal(expression = "id") Long memberId,
-            @RequestParam(defaultValue = "SCORE")ReviewSort sort
+    @Override
+    @GetMapping("/members/{memberId}/reviews")
+    public ApiResponse<ReviewResDto.MyReviewListDto> getMyReviews(
+            @PathVariable Long memberId,
+            @RequestParam("page") @ValidPage Integer page
     ) {
-        if (memberId == null) {
-            throw new MemberException(GeneralErrorCode.MEMBER_NOT_FOUND);
-        }
-
+        ReviewResDto.MyReviewListDto myReviewList = reviewQueryService.findMyReviews(memberId, page);
         return ApiResponse.onSuccess(
                 GeneralSuccessCode.FETCHED,
-                reviewQueryService.findMyReviews(memberId, sort)
+                myReviewList
         );
     }
 }

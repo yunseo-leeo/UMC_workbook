@@ -20,5 +20,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     WHERE m.id = :memberId
     """)
     Optional<MemberMypageResponseDto> findMemberMypage(@Param("id") Long id);
+
 }
 

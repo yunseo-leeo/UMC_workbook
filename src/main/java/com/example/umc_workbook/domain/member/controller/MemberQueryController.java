@@ -7,19 +7,20 @@ import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/members")
+@RequestMapping("/members")
 public class MemberQueryController {
 
     private final MemberQueryService memberQueryService;
 
-    @GetMapping("/mypage")
+    @GetMapping("{memberId}/mypage")
     public ApiResponse<MemberMypageResponseDto> findMemberMypage(
-            @AuthenticationPrincipal(expression = "id") Long memberId
+            @PathVariable Long memberId
     ) {
         return ApiResponse.onSuccess(
                 GeneralSuccessCode.FETCHED,

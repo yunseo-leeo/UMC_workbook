@@ -1,11 +1,10 @@
 package com.example.umc_workbook.domain.review.controller;
 
+import com.example.umc_workbook.domain.member.exception.MemberErrorCode;
 import com.example.umc_workbook.domain.member.exception.MemberException;
 import com.example.umc_workbook.domain.review.dto.ReviewCreateDto;
-import com.example.umc_workbook.domain.review.repository.ReviewRepository;
 import com.example.umc_workbook.domain.review.service.ReviewService;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
-import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ public class ReviewController {
             @RequestBody @Valid ReviewCreateDto req
             ){
         if (memberId == null) {
-            throw new MemberException(GeneralErrorCode.MEMBER_NOT_FOUND);
+            throw new MemberException(MemberErrorCode.MEMBER_NOT_FOUND);
         }
 
         reviewService.insertReview(memberId, req);

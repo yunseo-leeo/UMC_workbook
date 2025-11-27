@@ -4,6 +4,7 @@ import com.example.umc_workbook.domain.store.entity.Store;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Mission {
 
     @Id
@@ -25,7 +27,7 @@ public class Mission {
     private Integer point;
 
     @Column(name = "deadline")
-    private Long deadline;
+    private LocalDateTime deadline;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false)
@@ -35,7 +37,7 @@ public class Mission {
     @JoinColumn(name = "store_id") // 외래 키는 Mission 테이블에 존재
     private Store store;
 
-    public static Mission create(String content, int point, Long deadline, Store store) {
+    public static Mission create(String content, int point, LocalDateTime deadline, Store store) {
         return Mission.builder()
                 .content(content)
                 .point(point)

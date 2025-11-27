@@ -1,34 +1,30 @@
 package com.example.umc_workbook.domain.mission.controller;
 
-import com.example.umc_workbook.domain.mission.dto.MemberMissionRequestDto;
-import com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto;
+import com.example.umc_workbook.domain.mission.dto.MissionResDto;
 import com.example.umc_workbook.domain.mission.service.MemberMissionQueryService;
+import com.example.umc_workbook.global.annotation.ValidPage;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Validated
 @RequiredArgsConstructor
-@RequestMapping("/api/missions")
-public class MemberMissionQueryController {
+public class MemberMissionQueryController implements MemberMissionQueryControllerDocs {
 
     private final MemberMissionQueryService memberMissionQueryService;
 
-    @GetMapping("/my")
-    public ApiResponse<List<MemberMissionResponseDto>> findMemberMissions(
-            @AuthenticationPrincipal(expression = "id") Long MemberId,
-            @ModelAttribute MemberMissionRequestDto req
+    @Override
+    public ApiResponse<MissionResDto.MemberMissionListDto> findMemberMissions(
+            @PathVariable Long memberId,
+            @RequestParam(value = "page", defaultValue = "1") @ValidPage Integer page
             ) {
+        MissionResDto.MemberMissionListDto myMissionList = memberMissionQueryService.findMemberMissions(memberId, page);
         return ApiResponse.onSuccess(
                 GeneralSuccessCode.FETCHED,
-                memberMissionQueryService.findMemberMissions(MemberId, req)
+                myMissionList
         );
     }
 }

@@ -1,14 +1,17 @@
 package com.example.umc_workbook.domain.mission.service;
 
 import com.example.umc_workbook.domain.member.entity.Member;
+import com.example.umc_workbook.domain.member.exception.MemberErrorCode;
 import com.example.umc_workbook.domain.member.exception.MemberException;
 import com.example.umc_workbook.domain.member.repository.MemberRepository;
 import com.example.umc_workbook.domain.mission.entity.MemberMission;
 import com.example.umc_workbook.domain.mission.entity.Mission;
+import com.example.umc_workbook.domain.mission.exception.MemberMissionErrorCode;
+import com.example.umc_workbook.domain.mission.exception.MemberMissionException;
+import com.example.umc_workbook.domain.mission.exception.MissionErrorCode;
 import com.example.umc_workbook.domain.mission.exception.MissionException;
 import com.example.umc_workbook.domain.mission.repository.MemberMissionRepository;
 import com.example.umc_workbook.domain.mission.repository.MissionRepository;
-import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +28,13 @@ public class MissionService {
     public void startMission(Long memberId, Long missionId) {
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new MemberException(GeneralErrorCode.MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new MemberException(MemberErrorCode.MEMBER_NOT_FOUND));
 
         Mission mission = missionRepository.findById(missionId)
-                .orElseThrow(() -> new MissionException(GeneralErrorCode.MISSION_NOT_FOUND));
+                .orElseThrow(() -> new MissionException(MissionErrorCode.MISSION_NOT_FOUND));
 
         if(memberMissionRepository.existsByMemberIdAndMissionId(memberId, missionId)) {
-            throw new MissionException(GeneralErrorCode.MISSION_ALREADY_CHALLENGING);
+            throw new MemberMissionException(MemberMissionErrorCode.MISSION_ALREADY_CHALLENGING);
         }
 
         MemberMission mm = MemberMission.create(member, mission);
