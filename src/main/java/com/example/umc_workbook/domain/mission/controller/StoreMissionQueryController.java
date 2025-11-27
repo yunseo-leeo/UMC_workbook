@@ -6,11 +6,13 @@ import com.example.umc_workbook.global.annotation.ValidPage;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Validated
 @RequiredArgsConstructor
 public class StoreMissionQueryController implements StoreMissionQueryControllerDocs{
 

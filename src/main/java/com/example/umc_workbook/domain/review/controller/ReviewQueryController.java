@@ -6,9 +6,11 @@ import com.example.umc_workbook.global.annotation.ValidPage;
 import com.example.umc_workbook.global.apiPayload.ApiResponse;
 import com.example.umc_workbook.global.apiPayload.code.GeneralSuccessCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Validated
 @RequiredArgsConstructor
 public class ReviewQueryController implements ReviewQueryControllerDocs {
 
