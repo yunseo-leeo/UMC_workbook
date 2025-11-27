@@ -15,6 +15,7 @@ public class ReviewQueryController implements ReviewQueryControllerDocs {
     private final ReviewQueryService reviewQueryService;
 
     @Override
+    @GetMapping("/members/{memberId}/reviews")
     public ApiResponse<ReviewResDto.MyReviewListDto> getMyReviews(
             @PathVariable Long memberId,
             @RequestParam("page") @ValidPage Integer page

@@ -21,7 +21,6 @@ public interface ReviewQueryControllerDocs {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "대상이 존재하지 않음")
 
     })
-    @GetMapping("/members/{memberId}/reviews")
     ApiResponse<ReviewResDto.MyReviewListDto> getMyReviews(
             @PathVariable Long memberId,
             @RequestParam(value = "page", defaultValue = "1") @ValidPage Integer page
