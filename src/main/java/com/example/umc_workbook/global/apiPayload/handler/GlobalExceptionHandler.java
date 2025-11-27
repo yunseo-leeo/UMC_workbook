@@ -46,9 +46,10 @@ public class GlobalExceptionHandler {
         });
 
         GeneralErrorCode code = GeneralErrorCode.VALID_FAIL;
-        ApiResponse<Map<String, String>> errorResponse = ApiResponse.onFailure(code, errors);
 
-        return ResponseEntity.status(code.getStatus()).body(errorResponse);
+        return ResponseEntity
+                .status(code.getStatus())
+                .body(ApiResponse.onFailure(code, errors));
     }
 
 
@@ -62,8 +63,9 @@ public class GlobalExceptionHandler {
         );
 
         GeneralErrorCode code = GeneralErrorCode.VALID_FAIL;
-        ApiResponse<Map<String, String>> errorResponse = ApiResponse.onFailure(code, errors);
 
-        return ResponseEntity.status(code.getStatus()).body(errorResponse);
+        return ResponseEntity
+                .status(code.getStatus())
+                .body(ApiResponse.onFailure(code, errors));
     }
 }
