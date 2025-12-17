@@ -1,4 +1,4 @@
-package com.example.umc_workbook.domain.config;
+package com.example.umc_workbook.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

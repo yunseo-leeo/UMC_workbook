@@ -1,4 +1,4 @@
-package com.example.umc_workbook.domain.config;
+package com.example.umc_workbook.global.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

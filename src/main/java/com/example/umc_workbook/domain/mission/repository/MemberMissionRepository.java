@@ -3,6 +3,10 @@ package com.example.umc_workbook.domain.mission.repository;
 import com.example.umc_workbook.domain.mission.dto.MemberMissionRequestDto;
 import com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto;
 import com.example.umc_workbook.domain.mission.entity.MemberMission;
+import com.example.umc_workbook.domain.mission.entity.Mission;
+import com.example.umc_workbook.domain.mission.enums.MissionStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,31 +18,7 @@ import java.util.List;
 @Repository
 public interface MemberMissionRepository extends JpaRepository<MemberMission, Long> {
 
-    @Query("""
-    SELECT new com.example.umc_workbook.domain.mission.dto.MemberMissionResponseDto(
-        m.id, m.content, m.point, s.name, s.address, um.missionStatus, um.createdAt
-        )
-    FROM MemberMission um
-    JOIN um.mission m
-    JOIN m.store s
-    WHERE um.member.id = :userId
-      AND um.missionStatus IN (
-          com.example.umc_workbook.domain.mission.enums.MissionStatus.IN_PROGRESS,
-          com.example.umc_workbook.domain.mission.enums.MissionStatus.COMPLETED
-      )
-      AND (
-            :#{#req.cursorPoint} IS NULL
-            OR (m.point < :#{#req.cursorPoint})
-            OR (m.point = :#{#req.cursorPoint} AND um.createdAt < :#{#req.cursorCreatedAt})
-            OR (m.point = :#{#req.cursorPoint} AND um.createdAt = :#{#req.cursorCreatedAt} AND um.id < :#{#req.cursorId})
-    )
-    ORDER BY m.point DESC, um.createdAt DESC, um.id DESC
-    """)
-    List<MemberMissionResponseDto> findMemberMissions(
-            @Param("memberId") Long memberId,
-            @Param("req") MemberMissionRequestDto req,
-            Pageable pageable
-    );
+    Page<MemberMission> findByMemberIdAndMissionStatus(Long memberId, MissionStatus status, Pageable pageable);
 
     boolean existsByMemberIdAndMissionId(Long memberId, Long missionId);
 }

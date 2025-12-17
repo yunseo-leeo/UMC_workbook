@@ -26,7 +26,7 @@ public enum AddressType {
         return Arrays.stream(values())
                 .filter(r -> r.getCode().equals(code))
                 .findFirst()
-                .orElseThrow(()-> new AddressException(GeneralErrorCode.INVALID_ADDRESS));
+                .orElseThrow(()-> new AddressException(AddressErrorCode.INVALID_ADDRESS));
     }
 
 

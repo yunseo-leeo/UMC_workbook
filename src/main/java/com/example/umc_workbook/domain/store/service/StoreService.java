@@ -1,14 +1,16 @@
 package com.example.umc_workbook.domain.store.service;
 
+import com.example.umc_workbook.domain.common.AddressErrorCode;
 import com.example.umc_workbook.domain.mission.entity.Mission;
+import com.example.umc_workbook.domain.mission.exception.MissionErrorCode;
 import com.example.umc_workbook.domain.mission.exception.MissionException;
 import com.example.umc_workbook.domain.mission.repository.MissionRepository;
 import com.example.umc_workbook.domain.store.dto.MissionAddRequestDto;
 import com.example.umc_workbook.domain.store.dto.StoreCreateRequestDto;
 import com.example.umc_workbook.domain.store.entity.Store;
+import com.example.umc_workbook.domain.store.exception.StoreErrorCode;
 import com.example.umc_workbook.domain.store.exception.StoreException;
 import com.example.umc_workbook.domain.store.repository.StoreRepository;
-import com.example.umc_workbook.global.apiPayload.code.GeneralErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,14 +26,14 @@ public class StoreService {
     public void addStore(StoreCreateRequestDto req){
 
         if (req.getAddress() == null){
-            throw new StoreException(GeneralErrorCode.INVALID_ADDRESS);
+            throw new StoreException(AddressErrorCode.INVALID_ADDRESS);
         }
 
         if(req.getDetailAddress() == null || req.getDetailAddress().isEmpty()){
-            throw new StoreException(GeneralErrorCode.EMPTY_DETAIL_ADDRESS);
+            throw new StoreException(StoreErrorCode.EMPTY_DETAIL_ADDRESS);
         }
         if(req.getName() == null || req.getName().isEmpty()){
-            throw new StoreException(GeneralErrorCode.EMPTY_STORE_NAME);
+            throw new StoreException(StoreErrorCode.EMPTY_STORE_NAME);
         }
 
         Store store = Store.create(
@@ -48,10 +50,10 @@ public class StoreService {
     public void addMissionToStore(Long storeId, MissionAddRequestDto req){
 
         Store store = storeRepository.findById(storeId)
-                .orElseThrow(() -> new StoreException(GeneralErrorCode.STORE_NOT_FOUND));
+                .orElseThrow(() -> new StoreException(StoreErrorCode.STORE_NOT_FOUND));
 
         if(req.getPoint() == null || req.getPoint() <= 0){
-            throw new MissionException(GeneralErrorCode.INVALID_POINT);
+            throw new MissionException(MissionErrorCode.INVALID_POINT);
         }
 
         Mission mission = Mission.create(

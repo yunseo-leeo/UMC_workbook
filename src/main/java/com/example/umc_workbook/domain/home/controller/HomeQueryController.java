@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/home")
+@RequestMapping("/home")
 public class HomeQueryController {
 
     private final HomeQueryService homeQueryService;

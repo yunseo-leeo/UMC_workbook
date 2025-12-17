@@ -19,20 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class MissionController {
 
     private final MissionService missionService;
-
-    @PostMapping("/start")
-    public ApiResponse<Void> startMission(
-            @AuthenticationPrincipal(expression = "id") Long memberId,
-            @PathVariable Long missionId
-    ){
-        if(memberId == null){
-            throw new MemberException(GeneralErrorCode.MEMBER_NOT_FOUND);
-        }
-        if (missionId == null){
-            throw new MissionException(GeneralErrorCode.MISSION_NOT_FOUND);
-        }
-
-        missionService.startMission(memberId, missionId);
-        return ApiResponse.onSuccess(GeneralSuccessCode.CREATED, null);
-    }
+//
+//    @PostMapping("/{missionId}/start")
+//    public ApiResponse<Void> startMission(
+//            @AuthenticationPrincipal(expression = "id") Long memberId,
+//            @PathVariable Long missionId
+//    ){
+//        missionService.startMission(memberId, missionId);
+//        return ApiResponse.onSuccess(GeneralSuccessCode.CREATED, null);
+//    }
 }
