@@ -6,8 +6,13 @@ import com.example.umc_workbook.domain.member.enums.MemberStatus;
 import com.example.umc_workbook.domain.member.enums.SocialType;
 import com.example.umc_workbook.domain.member.mapping.*;
 import com.example.umc_workbook.domain.mission.entity.MemberMission;
+import com.example.umc_workbook.global.entity.BaseEntity;
+import com.example.umc_workbook.global.security.auth.Role;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,7 +25,8 @@ import java.util.List;
 @Table(name = "members")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-public class Member {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +44,14 @@ public class Member {
     @Column(name = "address", nullable = false)
     private AddressType address;
 
-    @Column(name = "email", length = 30, nullable = false)
+    @Column(name = "email", length = 30, nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "point")
     private int point;
@@ -55,17 +67,6 @@ public class Member {
 
     @Column(name = "socailType", nullable = false)
     private SocialType socailType;
-
-    @CreatedDate
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @CreatedDate
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
-
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "member")
     private List<MemberAlarm> memberAlarm = new ArrayList<>();
@@ -84,4 +85,64 @@ public class Member {
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private PhoneVerification phoneVerification;
+
+    @Builder(access = AccessLevel.PRIVATE)
+    private Member(
+            String name,
+            Gender gender,
+            LocalDate birth,
+            AddressType address,
+            String email,
+            String password,
+            Role role,
+            int point,
+            String detailAddress,
+            String phoneNumber,
+            MemberStatus memberStatus,
+            SocialType socialType
+    ) {
+        this.name = name;
+        this.gender = gender;
+        this.birth = birth;
+        this.address = address;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.point = point;
+        this.detailAddress = detailAddress;
+        this.phoneNumber = phoneNumber;
+        this.memberStatus = memberStatus;
+        this.socailType = socialType;
+    }
+
+    public static Member create(
+            String name,
+            Gender gender,
+            LocalDate birth,
+            AddressType address,
+            String email,
+            Role role,
+            String encodedPassword,
+            String detailAddress,
+            String phoneNumber,
+            SocialType socialType
+    ) {
+        return Member.builder()
+                .name(name)
+                .gender(gender)
+                .birth(birth)
+                .address(address)
+                .email(email)
+                .password(encodedPassword)
+                .role(role)
+                .point(0)
+                .detailAddress(detailAddress)
+                .phoneNumber(phoneNumber)
+                .memberStatus(MemberStatus.ACTIVE)
+                .socialType(socialType)
+                .build();
+    }
 }
+
+
+

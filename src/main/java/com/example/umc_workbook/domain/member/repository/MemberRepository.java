@@ -21,5 +21,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     """)
     Optional<MemberMypageResponseDto> findMemberMypage(@Param("id") Long id);
 
+    Optional<Member> findByEmail(String email);
 }
 
